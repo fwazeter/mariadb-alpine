@@ -6,16 +6,17 @@ ARG BUILD_VERSION
 ARG APK_VERSION="10.11.6-r0"
 
 # https://github.com/opencontainers/image-spec/blob/master/annotations.md
+# fork of: https://github.com/jbergstroem/mariadb-alpine 03/24/2024
 LABEL \
-  org.opencontainers.image.authors="Johan Bergström <bugs@bergstroem.nu>" \
+  org.opencontainers.image.authors="Frank Wazeter <dev@wazeter.com>" \
   org.opencontainers.image.created="$BUILD_DATE" \
-  org.opencontainers.image.description="A tiny MariaDB container" \
+  org.opencontainers.image.description="A tiny MariaDB container. Fork of jbergstroem/mariadb-alpine" \
   org.opencontainers.image.licenses="MIT" \
   org.opencontainers.image.revision="$BUILD_REF" \
-  org.opencontainers.image.source="https://github.com/jbergstroem/mariadb-alpine" \
-  org.opencontainers.image.title="jbergstroem/mariadb-alpine" \
-  org.opencontainers.image.url="https://github.com/jbergstroem/mariadb-alpine" \
-  org.opencontainers.image.vendor="Johan Bergström" \
+  org.opencontainers.image.source="https://github.com/fwazeter/mariadb-alpine" \
+  org.opencontainers.image.title="wazeter/mariadb-alpine" \
+  org.opencontainers.image.url="https://github.com/fwazeter/mariadb-alpine" \
+  org.opencontainers.image.vendor="Frank Wazeter" \
   org.opencontainers.image.version="$BUILD_VERSION"
 
 SHELL ["/bin/ash", "-euo", "pipefail", "-c"]
