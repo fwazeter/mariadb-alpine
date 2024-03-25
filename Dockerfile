@@ -50,7 +50,18 @@ RUN \
   # allow anyone to connect by default
   sed -ie 's/127.0.0.1/%/' /usr/share/mariadb/mysql_system_tables_data.sql && \
   mkdir /run/mysqld && \
-  chown mysql:mysql /etc/my.cnf.d/ /run/mysqld /usr/share/mariadb/mysql_system_tables_data.sql
+  chown mysql:mysql /etc/my.cnf.d/ /run/mysqld /usr/share/mariadb/mysql_system_tables_data.sql && \
+ # There is a critical vulnerability with libxml2 less than version 2.12.6. This is a fix. \
+ # Check for libxml2 version and update if necessary \
+    if apk list -I | grep -q 'libxml2-2.11.7-r0'; then \
+    echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories; \
+    apk update; \
+    apk add libxml2@edge; \
+    fi; \
+ # Check for curl version and update if necessary #libcurl for 8.6 adds this dependency: libpsl \
+    if apk list -I | grep -q 'curl-8.5.0-r0'; then \
+    apk add curl@edge; \
+    fi;
 
 # The ones installed by MariaDB was removed in the clean step above due to its large footprint
 # my_print_defaults should cover 95% of cases since it doesn't properly do recursion
